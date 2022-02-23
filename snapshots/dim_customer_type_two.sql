@@ -1,7 +1,19 @@
-{{ config(materialized='table') }}
+--scd (slowly changing dimensions) type two
 
-select {{ dbt_utils.surrogate_key(['c.customer_id']) }} as customer_sk, 
-        c.customer_id,
+{% snapshot dim_customer_type_two %}
+
+{{
+    config(
+      unique_key='customer_sk',
+      strategy='check',
+      check_cols='all',
+      target_schema='dimensions'
+    )
+}}
+
+select
+    {{ dbt_utils.surrogate_key(['c.customer_id']) }} as customer_sk, 
+    c.customer_id,
 	c.first_name as customer_first_name,
 	c.last_name as customer_last_name,
 	concat(first_name, ' ', last_name) as customer_full_name,
@@ -27,3 +39,4 @@ on a.city_id = ci.city_id
 inner join {{ ref('stg_country')}} co 
 on ci.country_id = co.country_id
 
+{% endsnapshot %}

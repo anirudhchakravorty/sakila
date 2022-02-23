@@ -8,7 +8,7 @@ select
 from
     {{ ref('stg_rental')}} r
     left outer join 
-    {{ ref('dim_customer')}} c
+    {{ ref('dim_customer_type_two')}} c
     on r.customer_id = c.customer_id    
     left outer join 
     {{ ref('dim_staff')}} s
