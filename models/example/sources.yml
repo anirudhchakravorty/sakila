@@ -13,3 +13,14 @@ sources:
       - name: country
       - name: city
       - name: rental
+      - name: film
+      - name: film_category
+      - name: language
+      - name: payment
+      - name: inventory
+  
+  - name: dbt_achakravorty
+    database: sakila_dw
+    tables:
+      - name: dim_date
+      - name: dim_timeofday

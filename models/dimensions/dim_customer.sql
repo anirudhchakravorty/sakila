@@ -19,11 +19,10 @@ select {{ dbt_utils.surrogate_key(['c.customer_id']) }} as customer_sk,
         end as is_active,
 	c.create_date as registration_date,
 	to_timestamp(c.last_update) as customer_last_udpate
-from {{ ref('stg_customer')}} c
+from {{ ref('stg_customer')}} c 
 inner join {{ ref('stg_address')}} a 
 on c.address_id = a.address_id
 inner join {{ ref('stg_city')}} ci 
 on a.city_id = ci.city_id
 inner join {{ ref('stg_country')}} co 
 on ci.country_id = co.country_id
-
