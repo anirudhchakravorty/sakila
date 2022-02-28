@@ -4,8 +4,8 @@ select {{ dbt_utils.surrogate_key(['s.staff_id']) }} as staff_sk,
     s.staff_id,
 	s.first_name as staff_first_name,
 	s.last_name as staff_last_name,
-	concat(first_name, ' ', last_name) AS staff_full_name,
-	s.email,
+	concat(first_name, ' ', last_name) as staff_full_name,
+	s.email as staff_email,
 	case s.active
 		when 'TRUE'
 			then 'Yes'
